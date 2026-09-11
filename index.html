@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leslie · Field Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF7F0;
+    --paper-deep:#F1EBDA;
+    --ink:#262F1F;
+    --ink-soft:#4B5240;
+    --rust:#A85426;
+    --teal:#24463E;
+    --gold:#C69A3B;
+    --sage:#77816A;
+    --line:#DED2B4;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:#FFFFFF;
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    margin:0;
+    color:var(--ink);
+  }
+  a{color:inherit;}
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 40px;
+  }
+  @media (max-width:640px){ .wrap{padding:0 22px;} }
+
+  /* ---- nav ---- */
+  nav{
+    position:sticky; top:0; z-index:10;
+    background:rgba(250,247,240,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:18px; padding-bottom:18px;
+  }
+  .brand{font-family:'Fraunces', serif; font-size:1.15rem; font-weight:500;}
+  .navlinks{display:flex; gap:28px; font-size:0.92rem;}
+  .navlinks a{text-decoration:none; color:var(--ink-soft); border-bottom:1px solid transparent; padding-bottom:2px;}
+  .navlinks a:hover{border-color:var(--rust); color:var(--ink);}
+  @media (max-width:640px){ .navlinks{gap:16px; font-size:0.82rem;} }
+
+  /* ---- hero ---- */
+  header.hero{
+    padding:100px 0 90px;
+    position:relative;
+    overflow:hidden;
+    background:var(--paper);
+  }
+  header.hero::before{
+    content:"";
+    position:absolute; right:-120px; top:-160px;
+    width:520px; height:520px; border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, rgba(198,154,59,0.28), rgba(198,154,59,0) 65%);
+  }
+  header.hero::after{
+    content:"";
+    position:absolute; left:-180px; bottom:-220px;
+    width:460px; height:460px; border-radius:50%;
+    background:radial-gradient(circle at 60% 40%, rgba(36,70,62,0.18), rgba(36,70,62,0) 65%);
+  }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--sage);
+    letter-spacing:0.02em;
+    margin-bottom:18px;
+  }
+  h1.display{
+    font-size:clamp(2.6rem, 6vw, 4.4rem);
+    line-height:1.05;
+    max-width:14ch;
+    letter-spacing:-0.01em;
+  }
+  .hero-sub{
+    margin-top:26px;
+    max-width:46ch;
+    font-size:1.08rem;
+    color:var(--ink-soft);
+  }
+  .hero-meta{
+    margin-top:40px;
+    display:flex; gap:36px; flex-wrap:wrap;
+    font-size:0.9rem;
+  }
+  .hero-meta div{border-left:2px solid var(--rust); padding-left:12px;}
+  .hero-meta span{display:block; color:var(--sage); font-size:0.78rem; margin-bottom:2px;}
+
+  /* ---- section shell ---- */
+  section{padding:70px 0;}
+  section + section{border-top:1px solid var(--line);}
+  .section-head{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:32px;
+    margin-bottom:44px;
+  }
+  .section-head h2{font-size:1.9rem;}
+  .section-head .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--teal);
+    padding-top:8px;
+  }
+  .section-head p.dek{
+    color:var(--ink-soft);
+    max-width:56ch;
+    margin-top:14px;
+    font-size:0.98rem;
+  }
+  @media (max-width:720px){
+    .section-head{grid-template-columns:1fr;}
+  }
+
+  /* ---- research ---- */
+  .research-list{display:flex; flex-direction:column;}
+  .research-item{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:32px;
+    padding:26px 0;
+    border-top:1px solid var(--line);
+  }
+  .research-item:first-child{border-top:none;}
+  .research-item .when{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:var(--sage);
+    padding-top:4px;
+  }
+  .research-item h3{font-size:1.2rem; font-weight:500; margin-bottom:8px;}
+  .research-item p{color:var(--ink-soft); font-size:0.96rem; max-width:60ch;}
+  .research-item .venue{
+    display:inline-block; margin-top:10px;
+    font-size:0.82rem; color:var(--rust);
+    border:1px solid var(--rust);
+    padding:3px 10px; border-radius:2px;
+  }
+  @media (max-width:720px){ .research-item{grid-template-columns:1fr;} }
+
+  /* ---- repos ---- */
+  .repo-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media (max-width:820px){ .repo-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .repo-grid{grid-template-columns:1fr;} }
+  .repo-card{
+    background:#FFFFFF;
+    padding:26px 24px;
+    display:flex; flex-direction:column; gap:14px;
+    text-decoration:none;
+    transition:background 0.15s ease;
+  }
+  .repo-card:hover{background:var(--paper);}
+  .repo-name{font-family:'Fraunces', serif; font-size:1.15rem; font-weight:500;}
+  .repo-desc{font-size:0.9rem; color:var(--ink-soft); flex-grow:1;}
+  .repo-lang{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.76rem;
+    color:var(--teal);
+    display:flex; align-items:center; gap:6px;
+  }
+  .dot{width:8px; height:8px; border-radius:50%; background:var(--gold); display:inline-block;}
+
+  /* ---- field notes / photography ---- */
+  .plate-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:16px;
+  }
+  @media (max-width:820px){ .plate-grid{grid-template-columns:repeat(2,1fr);} }
+  .plate{
+    aspect-ratio:4/5;
+    border:1.5px dashed var(--sage);
+    border-radius:2px;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding:14px;
+    position:relative;
+    background:linear-gradient(155deg, var(--tone1, #DCCFA8), var(--tone2, #B9A46C));
+  }
+  .plate:nth-child(1){ --tone1:#E4D6AE; --tone2:#B98A4E; }
+  .plate:nth-child(2){ --tone1:#D9E0C8; --tone2:#7C8F63; }
+  .plate:nth-child(3){ --tone1:#E7D3C4; --tone2:#A85426; }
+  .plate:nth-child(4){ --tone1:#D6E2DD; --tone2:#3F6B5F; }
+  .plate:nth-child(5){ --tone1:#EFE2C2; --tone2:#C69A3B; }
+  .plate:nth-child(6){ --tone1:#DCD3E0; --tone2:#6E5C7B; }
+  .plate:nth-child(7){ --tone1:#E0DCC9; --tone2:#8B9370; }
+  .plate:nth-child(8){ --tone1:#E9D8CB; --tone2:#8F5A3A; }
+  .plate .cap{
+    background:rgba(38,47,31,0.72);
+    color:var(--paper);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    padding:5px 8px;
+    border-radius:2px;
+    align-self:flex-start;
+  }
+  .plate-note{
+    margin-top:22px; font-size:0.85rem; color:var(--sage); font-style:italic;
+  }
+  .see-more{
+    display:inline-block;
+    margin-top:26px;
+    font-size:0.88rem;
+    color:var(--rust);
+    border:1px solid var(--rust);
+    padding:9px 20px;
+    border-radius:2px;
+    text-decoration:none;
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .see-more:hover{ background:var(--rust); color:#FFFFFF; }
+
+  /* ---- about strip ---- */
+  .about-body{max-width:64ch; font-size:1.02rem; color:var(--ink-soft);}
+  .about-body p + p{margin-top:16px;}
+
+  /* ---- footer ---- */
+  footer{
+    padding:60px 0 70px;
+    border-top:1px solid var(--line);
+  }
+  footer .wrap{
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px;
+  }
+  footer h2{font-size:1.6rem; max-width:16ch;}
+  .footlinks{display:flex; gap:22px; flex-wrap:wrap; font-size:0.92rem;}
+  .footlinks a{text-decoration:none; border-bottom:1px solid var(--rust); padding-bottom:2px;}
+  .fineprint{margin-top:40px; font-size:0.78rem; color:var(--sage); font-family:'IBM Plex Mono', monospace;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">Leslie</div>
+    <div class="navlinks">
+      <a href="#research">Research</a>
+      <a href="#code">Code</a>
+      <a href="#field-notes">Field Notes</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">computational materials science — doctoral researcher</div>
+    <h1 class="display">Modeling matter at the atomic scale, watching birds at the human one.</h1>
+    <p class="hero-sub">I'm Leslie — a PhD researcher working on first-principles simulation (VASP, DFT, molecular dynamics), and an amateur bird photographer who never quite leaves the lab mindset behind: patient observation, careful documentation, waiting for the right frame.</p>
+    <div class="hero-meta">
+      <div><span>Focus</span>Interfacial &amp; structural analysis</div>
+      <div><span>Tools</span>VASP · Python · Fortran</div>
+      <div><span>Based in</span>Add your institution</div>
+    </div>
+  </div>
+</header>
+
+<section id="research">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="label">01 — Doctoral work</div>
+      <div>
+        <h2>Research &amp; publications</h2>
+        <p class="dek">Placeholder entries — swap these for your actual thesis chapters and papers. Each one links out to a venue tag you can edit.</p>
+      </div>
+    </div>
+    <div class="research-list">
+      <div class="research-item">
+        <div class="when">2024 — 2026</div>
+        <div>
+          <h3>Structural dynamics at solid–liquid interfaces</h3>
+          <p>Placeholder abstract: describe your thesis project here — the system studied, the method (e.g. ab initio molecular dynamics), and the central finding.</p>
+          <span class="venue">Journal name, year</span>
+        </div>
+      </div>
+      <div class="research-item">
+        <div class="when">2023</div>
+        <div>
+          <h3>Radial distribution analysis of [your system]</h3>
+          <p>Placeholder abstract: a short description of this paper or chapter, written for a reader outside your subfield.</p>
+          <span class="venue">Conference / preprint</span>
+        </div>
+      </div>
+      <div class="research-item">
+        <div class="when">2022</div>
+        <div>
+          <h3>[Your earliest publication or thesis milestone]</h3>
+          <p>Placeholder abstract: keep it to two sentences — what question, what method, what you found.</p>
+          <span class="venue">Journal name, year</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="code">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="label">02 — Open source</div>
+      <div>
+        <h2>Code from GitHub</h2>
+        <p class="dek">Pulled live from github.com/Leslieins — mostly tooling that supports the research above: post-processing scripts and analysis code for VASP output.</p>
+      </div>
+    </div>
+    <div class="repo-grid">
+      <a class="repo-card" href="https://github.com/Leslieins/PROJ-VACF" target="_blank">
+        <div class="repo-name">PROJ-VACF</div>
+        <div class="repo-desc">Fortran calculations for VASP post-processing.</div>
+        <div class="repo-lang"><span class="dot"></span>Fortran</div>
+      </a>
+      <a class="repo-card" href="https://github.com/Leslieins/RDF" target="_blank">
+        <div class="repo-name">RDF</div>
+        <div class="repo-desc">VASP radial distribution function calculation.</div>
+        <div class="repo-lang"><span class="dot"></span>Fortran</div>
+      </a>
+      <a class="repo-card" href="https://github.com/Leslieins/py-vasp" target="_blank">
+        <div class="repo-name">py-vasp</div>
+        <div class="repo-desc">Python scripts for working with VASP input and output.</div>
+        <div class="repo-lang"><span class="dot"></span>Python</div>
+      </a>
+      <a class="repo-card" href="https://github.com/Leslieins/willchand" target="_blank">
+        <div class="repo-name">willchand</div>
+        <div class="repo-desc">Willard and Chandler (2010) interface analysis.</div>
+        <div class="repo-lang"><span class="dot"></span>Fortran</div>
+      </a>
+      <a class="repo-card" href="https://github.com/Leslieins/FORCEDENS" target="_blank">
+        <div class="repo-name">FORCEDENS</div>
+        <div class="repo-desc">Force density calculations from simulation trajectories.</div>
+        <div class="repo-lang"><span class="dot"></span>Fortran</div>
+      </a>
+      <a class="repo-card" href="https://github.com/Leslieins/Snake" target="_blank">
+        <div class="repo-name">Snake</div>
+        <div class="repo-desc">A classic Snake game — the one non-research repo.</div>
+        <div class="repo-lang"><span class="dot"></span>Python</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="field-notes">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="label">03 — Outside the lab</div>
+      <div>
+        <h2>Field notes: bird photography</h2>
+        <p class="dek">Eight plates, ready for your photos. Replace each background block with an &lt;img&gt; and edit the caption to the species and location.</p>
+      </div>
+    </div>
+    <div class="plate-grid">
+      <div class="plate"><span class="cap">Species — Location</span></div>
+      <div class="plate"><span class="cap">Species — Location</span></div>
+      <div class="plate"><span class="cap">Species — Location</span></div>
+      <div class="plate"><span class="cap">Species — Location</span></div>
+      <div class="plate"><span class="cap">Species — Location</span></div>
+      <div class="plate"><span class="cap">Species — Location</span></div>
+      <div class="plate"><span class="cap">Species — Location</span></div>
+      <div class="plate"><span class="cap">Species — Location</span></div>
+    </div>
+    <a class="see-more" href="birds.html">View more photos</a>
+    <p class="plate-note">Add a line here about how you got into birding, or which species you're still chasing.</p>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="label">04 — About</div>
+      <div>
+        <h2>A little more context</h2>
+      </div>
+    </div>
+    <div class="about-body">
+      <p>Placeholder bio — a paragraph or two on your path into computational materials science, what draws you to it, and what you're working toward.</p>
+      <p>A second paragraph works well here for how birding fits into that life — the overlap in patience and attention between fieldwork behind a lens and fieldwork behind a simulation.</p>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's talk research, code, or birds.</h2>
+    <div class="footlinks">
+      <a href="mailto:your.email@university.edu">Email</a>
+      <a href="https://github.com/Leslieins" target="_blank">GitHub</a>
+      <a href="#">Google Scholar</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+  <div class="wrap fineprint">Built for Leslie — edit freely.</div>
+</footer>
+
+</body>
+</html>
