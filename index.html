@@ -190,36 +190,42 @@
   .plate-grid{
     display:grid;
     grid-template-columns:repeat(4, 1fr);
-    gap:16px;
+    gap:30px 18px;
   }
   @media (max-width:820px){ .plate-grid{grid-template-columns:repeat(2,1fr);} }
+  .plate-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+  }
   .plate{
+    width:100%;
     aspect-ratio:4/5;
+    border-radius:50%;
     border:1.5px dashed var(--sage);
-    border-radius:2px;
-    display:flex; flex-direction:column; justify-content:flex-end;
-    padding:14px;
-    position:relative;
     background:linear-gradient(155deg, var(--tone1, #DCCFA8), var(--tone2, #B9A46C));
     background-size:cover;
     background-position:center;
+    transition:transform 0.35s ease, box-shadow 0.35s ease;
   }
-  .plate:nth-child(1){ --tone1:#E4D6AE; --tone2:#B98A4E; }
-  .plate:nth-child(2){ --tone1:#D9E0C8; --tone2:#7C8F63; }
-  .plate:nth-child(3){ --tone1:#E7D3C4; --tone2:#A85426; }
-  .plate:nth-child(4){ --tone1:#D6E2DD; --tone2:#3F6B5F; }
-  /* .plate:nth-child(5){ --tone1:#EFE2C2; --tone2:#C69A3B; }
-  .plate:nth-child(6){ --tone1:#DCD3E0; --tone2:#6E5C7B; }
-  .plate:nth-child(7){ --tone1:#E0DCC9; --tone2:#8B9370; }
-  .plate:nth-child(8){ --tone1:#E9D8CB; --tone2:#8F5A3A; } */
-  .plate .cap{
-    background:rgba(38,47,31,0.72);
-    color:var(--paper);
+  .plate:hover{
+    transform:scale(1.06);
+    box-shadow:0 14px 32px rgba(38,47,31,0.28);
+  }
+  .plate-item:nth-child(1) .plate{ --tone1:#E4D6AE; --tone2:#B98A4E; }
+  .plate-item:nth-child(2) .plate{ --tone1:#D9E0C8; --tone2:#7C8F63; }
+  .plate-item:nth-child(3) .plate{ --tone1:#E7D3C4; --tone2:#A85426; }
+  .plate-item:nth-child(4) .plate{ --tone1:#D6E2DD; --tone2:#3F6B5F; }
+  .plate-item:nth-child(5) .plate{ --tone1:#EFE2C2; --tone2:#C69A3B; }
+  .plate-item:nth-child(6) .plate{ --tone1:#DCD3E0; --tone2:#6E5C7B; }
+  .plate-item:nth-child(7) .plate{ --tone1:#E0DCC9; --tone2:#8B9370; }
+  .plate-item:nth-child(8) .plate{ --tone1:#E9D8CB; --tone2:#8F5A3A; }
+  .cap{
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.72rem;
-    padding:5px 8px;
-    border-radius:2px;
-    align-self:flex-start;
+    font-size:0.74rem;
+    color:var(--ink-soft);
+    text-align:center;
   }
   .plate-note{
     margin-top:22px; font-size:0.85rem; color:var(--sage); font-style:italic;
@@ -373,18 +379,42 @@
       <div class="label">03 — Outside the lab</div>
       <div>
         <h2>Field notes: bird photography</h2>
-        <p class="dek">Eight plates, ready for your photos. Replace each background block with an &lt;img&gt; and edit the caption to the species and location.</p>
+        <p class="dek">Eight plates, ready for your photos. Replace each background block with your own image and edit the caption to the species and location.</p>
       </div>
     </div>
     <div class="plate-grid">
-      <div class="plate" style="background-image:url('./images/DSC_0192.jpg')"><span class="cap">Black Crowned Night Heron— Bolsa Chica</span></div>
-      <div class="plate" style="background-image:url('./images/DSC_0268.jpg')"><span class="cap">Elegant Tern — Bolsa Chica</span></div>
-      <div class="plate"><span class="cap">Species — Location</span></div>
-      <div class="plate"><span class="cap">Species — Location</span></div>
-      <div class="plate"><span class="cap">Species — Location</span></div>
-      <div class="plate"><span class="cap">Species — Location</span></div>
-      <div class="plate"><span class="cap">Species — Location</span></div>
-      <div class="plate"><span class="cap">Species — Location</span></div>
+      <div class="plate-item">
+        <div class="plate" style="background-image:url('./images/DSC_0192.jpg')"></div>
+        <span class="cap">Black Crowned Night Heron — Bolsa Chica</span>
+      </div>
+      <div class="plate-item">
+        <div class="plate" style="background-image:url('./images/DSC_0268.jpg')"></div>
+        <span class="cap">Elegant Tern — Bolsa Chica</span>
+      </div>
+      <div class="plate-item">
+        <div class="plate"></div>
+        <span class="cap">Species — Location</span>
+      </div>
+      <div class="plate-item">
+        <div class="plate"></div>
+        <span class="cap">Species — Location</span>
+      </div>
+      <div class="plate-item">
+        <div class="plate"></div>
+        <span class="cap">Species — Location</span>
+      </div>
+      <div class="plate-item">
+        <div class="plate"></div>
+        <span class="cap">Species — Location</span>
+      </div>
+      <div class="plate-item">
+        <div class="plate"></div>
+        <span class="cap">Species — Location</span>
+      </div>
+      <div class="plate-item">
+        <div class="plate"></div>
+        <span class="cap">Species — Location</span>
+      </div>
     </div>
     <a class="see-more" href="birds.html">View more photos</a>
     <p class="plate-note">Add a line here about how you got into birding, or which species you're still chasing.</p>
